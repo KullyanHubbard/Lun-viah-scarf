@@ -55,6 +55,36 @@
                 <span></span>
             </button>
         </div>
+        <div class="nav-mobile-actions" aria-label="Aksi pengguna mobile">
+            <button type="button" class="nav-action nav-mobile-action nav-mobile-search-toggle" aria-label="Buka pencarian mobile" aria-controls="mobile-search-tray" aria-expanded="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="11" cy="11" r="6.5"></circle>
+                    <path d="M16 16L21 21"></path>
+                </svg>
+            </button>
+            <button type="button" class="nav-action nav-mobile-action" aria-label="Wishlist">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 20.5s-7-4.4-7-10.1A4.2 4.2 0 0 1 9.2 6c1.2 0 2.3.5 2.8 1.5.5-1 1.6-1.5 2.8-1.5A4.2 4.2 0 0 1 19 10.4c0 5.7-7 10.1-7 10.1Z"></path>
+                </svg>
+            </button>
+            <button type="button" class="nav-action nav-mobile-action" aria-label="Keranjang">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 8.5h14l-1 11H6l-1-11Z"></path>
+                    <path d="M9 8.5a3 3 0 1 1 6 0"></path>
+                </svg>
+            </button>
+            <button type="button" class="nav-action nav-mobile-action" aria-label="Akun">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="8" r="3.5"></circle>
+                    <path d="M5 19.5c1.7-3 4.2-4.5 7-4.5s5.3 1.5 7 4.5"></path>
+                </svg>
+            </button>
+        </div>
+        <form id="mobile-search-tray" class="nav-mobile-search-tray" role="search">
+            <label class="nav-mobile-search-field" for="site-search-mobile">
+                <input id="site-search-mobile" class="nav-search-input-mobile" type="search" name="search-mobile" placeholder="Cari scarf, warna, atau koleksi">
+            </label>
+        </form>
     </nav>
 
     <!-- HERO -->
