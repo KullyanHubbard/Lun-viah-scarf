@@ -2,6 +2,12 @@ const navbar = document.querySelector('.navbar');
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
 const heroImage = document.querySelector('.hero-image');
+const searchForm = document.querySelector('.nav-search');
+const searchToggle = document.querySelector('.search-toggle');
+const searchInput = document.querySelector('.nav-search-input');
+const koleksiSection = document.querySelector('#koleksi');
+const productCards = document.querySelectorAll('.koleksi .card');
+const searchEmpty = document.querySelector('.search-empty');
 
 const revealElements = document.querySelectorAll(
     '.hero-content, .hero-image, .about-text, .about-image, .card, .keunggulan .item, .testi-card, .gallery-grid img, .footer-content'
@@ -31,6 +37,8 @@ function revealOnScroll() {
 }
 
 function handleNavbarScroll() {
+    if (!navbar) return;
+
     if (window.scrollY > 40) {
         navbar.classList.add('scrolled');
     } else {
@@ -44,6 +52,14 @@ function handleHeroParallax() {
     heroImage.style.transform = `translateY(${offset}px)`;
 }
 
+function closeSearch() {
+    if (!searchForm || !searchToggle) return;
+
+    searchForm.classList.remove('active');
+    searchToggle.classList.remove('active');
+    searchToggle.setAttribute('aria-expanded', 'false');
+}
+
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (event) {
@@ -53,16 +69,93 @@ function initSmoothScroll() {
 
             event.preventDefault();
             targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            navLinks.classList.remove('active');
-            hamburger.classList.remove('active');
+            navLinks?.classList.remove('active');
+            hamburger?.classList.remove('active');
+            hamburger?.setAttribute('aria-expanded', 'false');
+            closeSearch();
         });
     });
 }
 
 function initMobileMenu() {
+    if (!hamburger || !navLinks) return;
+
     hamburger.addEventListener('click', () => {
+        closeSearch();
         navLinks.classList.toggle('active');
         hamburger.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', String(navLinks.classList.contains('active')));
+    });
+}
+
+function initSearchToggle() {
+    if (!searchForm || !searchToggle || !searchInput) return;
+
+    searchToggle.addEventListener('click', event => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const shouldOpen = !searchForm.classList.contains('active');
+        closeSearch();
+
+        if (shouldOpen) {
+            navLinks?.classList.remove('active');
+            hamburger?.classList.remove('active');
+            hamburger?.setAttribute('aria-expanded', 'false');
+            searchForm.classList.add('active');
+            searchToggle.classList.add('active');
+            searchToggle.setAttribute('aria-expanded', 'true');
+            requestAnimationFrame(() => searchInput.focus());
+        }
+    });
+
+    searchForm.addEventListener('click', event => {
+        event.stopPropagation();
+    });
+
+    document.addEventListener('click', event => {
+        if (!searchForm.contains(event.target)) {
+            closeSearch();
+        }
+    });
+
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') {
+            closeSearch();
+            searchToggle.focus();
+        }
+    });
+}
+
+function filterCollection() {
+    if (!productCards.length) return;
+
+    const query = searchInput?.value.trim().toLowerCase() ?? '';
+    let visibleCount = 0;
+
+    productCards.forEach(card => {
+        const isMatch = !query || card.textContent.toLowerCase().includes(query);
+        card.hidden = !isMatch;
+
+        if (isMatch) {
+            visibleCount += 1;
+        }
+    });
+
+    if (searchEmpty) {
+        searchEmpty.hidden = visibleCount !== 0;
+    }
+}
+
+function initCollectionSearch() {
+    if (!searchInput || !productCards.length) return;
+
+    searchInput.addEventListener('input', filterCollection);
+
+    searchForm?.addEventListener('submit', event => {
+        event.preventDefault();
+        filterCollection();
+        koleksiSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 }
 
@@ -71,11 +164,13 @@ window.addEventListener('DOMContentLoaded', () => {
     revealOnScroll();
     initSmoothScroll();
     initMobileMenu();
+    initSearchToggle();
+    initCollectionSearch();
     handleNavbarScroll();
     handleHeroParallax();
 });
 
 window.addEventListener('scroll', () => {
-Isro Faiz Gumilang    handleNavbarScroll();
+    handleNavbarScroll();
     handleHeroParallax();
 });
