@@ -5,9 +5,8 @@ const heroImage = document.querySelector('.hero-image');
 const searchForm = document.querySelector('.nav-search');
 const searchToggle = document.querySelector('.search-toggle');
 const searchInputDesktop = document.querySelector('.nav-search-input');
-const navMobileActions = document.querySelector('.nav-mobile-actions');
-const searchMobileTray = document.querySelector('.nav-mobile-search-tray');
 const searchToggleMobile = document.querySelector('.nav-mobile-search-toggle');
+const searchMobilePanel = document.querySelector('.nav-mobile-search-panel');
 const searchInputMobile = document.querySelector('.nav-search-input-mobile');
 const koleksiSection = document.querySelector('#koleksi');
 const productCards = document.querySelectorAll('.koleksi .card');
@@ -65,9 +64,9 @@ function closeDesktopSearch() {
 }
 
 function closeMobileSearch() {
-    if (!searchMobileTray || !searchToggleMobile) return;
+    if (!searchMobilePanel || !searchToggleMobile) return;
 
-    searchMobileTray.classList.remove('active');
+    searchMobilePanel.classList.remove('active');
     searchToggleMobile.classList.remove('active');
     searchToggleMobile.setAttribute('aria-expanded', 'false');
 }
@@ -140,28 +139,25 @@ function initDesktopSearchToggle() {
 }
 
 function initMobileSearchToggle() {
-    if (!searchMobileTray || !searchToggleMobile || !searchInputMobile) return;
+    if (!searchMobilePanel || !searchToggleMobile || !searchInputMobile) return;
 
     searchToggleMobile.addEventListener('click', event => {
         event.preventDefault();
         event.stopPropagation();
 
-        const shouldOpen = !searchMobileTray.classList.contains('active');
+        const shouldOpen = !searchMobilePanel.classList.contains('active');
         closeMobileSearch();
 
         if (shouldOpen) {
             closeDesktopSearch();
-            navLinks?.classList.remove('active');
-            hamburger?.classList.remove('active');
-            hamburger?.setAttribute('aria-expanded', 'false');
-            searchMobileTray.classList.add('active');
+            searchMobilePanel.classList.add('active');
             searchToggleMobile.classList.add('active');
             searchToggleMobile.setAttribute('aria-expanded', 'true');
             requestAnimationFrame(() => searchInputMobile.focus());
         }
     });
 
-    searchMobileTray.addEventListener('click', event => {
+    searchMobilePanel.addEventListener('click', event => {
         event.stopPropagation();
     });
 }
@@ -173,9 +169,9 @@ function initSearchDismissHandlers() {
         }
 
         if (
-            searchMobileTray &&
-            !searchMobileTray.contains(event.target) &&
-            (!navMobileActions || !navMobileActions.contains(event.target))
+            searchMobilePanel &&
+            !searchMobilePanel.contains(event.target) &&
+            !searchToggleMobile?.contains(event.target)
         ) {
             closeMobileSearch();
         }
@@ -185,7 +181,7 @@ function initSearchDismissHandlers() {
         if (event.key !== 'Escape') return;
 
         const desktopWasActive = Boolean(searchForm?.classList.contains('active'));
-        const mobileWasActive = Boolean(searchMobileTray?.classList.contains('active'));
+        const mobileWasActive = Boolean(searchMobilePanel?.classList.contains('active'));
 
         closeAllSearch();
 
@@ -240,7 +236,7 @@ function initCollectionSearch() {
         });
     });
 
-    const searchForms = [searchForm, searchMobileTray].filter(Boolean);
+    const searchForms = [searchForm, searchMobilePanel].filter(Boolean);
 
     searchForms.forEach(form => {
         form.addEventListener('submit', event => {
