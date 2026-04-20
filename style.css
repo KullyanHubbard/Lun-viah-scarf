@@ -1190,118 +1190,118 @@ section,
     .footer-links a {
         width: 100%;
     }
-}
+    
+    @media (max-width: 480px) {
+        .navbar,
+        .hero,
+        .about,
+        .koleksi,
+        .keunggulan,
+        .testimoni,
+        .gallery,
+        .footer {
+            width: min(100% - 20px, 100%);
+        }
 
-@media (max-width: 480px) {
-    .navbar,
-    .hero,
-    .about,
-    .koleksi,
-    .keunggulan,
-    .testimoni,
-    .gallery,
-    .footer {
-        width: min(100% - 20px, 100%);
-    }
+        .navbar {
+            top: calc(env(safe-area-inset-top, 0px) + 6px);
+            padding: 12px;
+            gap: 10px;
+        }
 
-    .navbar {
-        top: calc(env(safe-area-inset-top, 0px) + 6px);
-        padding: 12px;
-        gap: 10px;
-    }
+        .hamburger {
+            width: 38px;
+            min-height: 38px;
+            height: 38px;
+        }
 
-    .hamburger {
-        width: 38px;
-        min-height: 38px;
-        height: 38px;
-    }
+        .nav-logo {
+            font-size: clamp(1.74rem, 8.8vw, 2.02rem);
+        }
 
-    .nav-logo {
-        font-size: clamp(1.74rem, 8.8vw, 2.02rem);
-    }
+        .hero {
+            padding-top: calc(env(safe-area-inset-top, 0px) + 102px);
+            padding-bottom: 44px;
+        }
 
-    .hero {
-        padding-top: calc(env(safe-area-inset-top, 0px) + 102px);
-        padding-bottom: 44px;
-    }
+        .hero-content h1 {
+            font-size: clamp(2.6rem, 13vw, 3.4rem);
+            margin-bottom: 16px;
+        }
 
-    .hero-content h1 {
-        font-size: clamp(2.6rem, 13vw, 3.4rem);
-        margin-bottom: 16px;
-    }
+        .hero-buttons {
+            gap: 10px;
+        }
 
-    .hero-buttons {
-        gap: 10px;
-    }
+        .btn-primary,
+        .btn-secondary {
+            max-width: 146px;
+            min-height: 48px;
+            padding: 0 14px;
+            font-size: 0.88rem;
+        }
 
-    .btn-primary,
-    .btn-secondary {
-        max-width: 146px;
-        min-height: 48px;
-        padding: 0 14px;
-        font-size: 0.88rem;
-    }
+        .hero-lead {
+            margin-bottom: 24px;
+        }
 
-    .hero-lead {
-        margin-bottom: 24px;
-    }
+        .testi-card,
+        .keunggulan .item {
+            padding: 20px 18px;
+        }
 
-    .testi-card,
-    .keunggulan .item {
-        padding: 20px 18px;
-    }
+        .hero-stats div {
+            padding: 12px 8px;
+        }
 
-    .hero-stats div {
-        padding: 12px 8px;
-    }
+        .card h3,
+        .keunggulan .item h3 {
+            font-size: 1.45rem;
+        }
 
-    .card h3,
-    .keunggulan .item h3 {
-        font-size: 1.45rem;
-    }
+        .card h3 {
+            padding: 20px 18px 8px;
+        }
 
-    .card h3 {
-        padding: 20px 18px 8px;
-    }
+        .card p,
+        .card span {
+            margin-left: 18px;
+            margin-right: 18px;
+            padding-left: 0;
+            padding-right: 0;
+        }
 
-    .card p,
-    .card span {
-        margin-left: 18px;
-        margin-right: 18px;
-        padding-left: 0;
-        padding-right: 0;
-    }
+        .card p {
+            padding: 0 18px;
+        }
 
-    .card p {
-        padding: 0 18px;
-    }
+        .card span {
+            margin-top: 16px;
+            margin-bottom: 20px;
+            padding: 10px 14px;
+        }
 
-    .card span {
-        margin-top: 16px;
-        margin-bottom: 20px;
-        padding: 10px 14px;
-    }
+        .card img,
+        .gallery-grid img {
+            height: 220px;
+        }
 
-    .card img,
-    .gallery-grid img {
-        height: 220px;
-    }
+        .hero-image {
+            height: clamp(170px, 30vh, 230px);
+            min-height: clamp(170px, 30vh, 230px);
+        }
 
-    .hero-image {
-        height: clamp(170px, 30vh, 230px);
-        min-height: clamp(170px, 30vh, 230px);
-    }
+        .about-image {
+            height: 300px;
+            min-height: 300px;
+        }
 
-    .about-image {
-        height: 300px;
-        min-height: 300px;
-    }
-
-    .about,
-    .koleksi,
-    .keunggulan,
-    .testimoni,
-    .gallery {
-        padding: 64px 0;
+        .about,
+        .koleksi,
+        .keunggulan,
+        .testimoni,
+        .gallery {
+            padding: 64px 0;
+        }
     }
 }
